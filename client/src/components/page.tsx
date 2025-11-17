@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Heart, Send, Sparkles, MessageCircle, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
+import heroImage from '../assets/z7010725365388_8a63d3025d0c6a44affb4530ae02f842.jpg';
 
 interface Wish {
   id: number;
@@ -18,12 +19,8 @@ export default function TeacherTributeLanding() {
   const [showCarousel, setShowCarousel] = useState(false);
   const [currentWishIndex, setCurrentWishIndex] = useState(0);
 
-  // Hình ảnh có thể thay đổi
-  const heroImage = 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800';
-  
   const API_URL = 'http://localhost:3001/api';
   
-  // Tải lời chúc từ server khi component mount
   useEffect(() => {
     fetchWishes();
   }, []);
@@ -43,7 +40,6 @@ export default function TeacherTributeLanding() {
     }
   };
 
-  // Xử lý keyboard navigation cho carousel
   useEffect(() => {
     if (!showCarousel) return;
 
@@ -154,7 +150,6 @@ export default function TeacherTributeLanding() {
           duration: 4000,
         }}
       />
-      {/* Hero Section - Clean & Modern */}
       <section className="relative bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700 py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.3))] bg-[size:32px_32px] opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 via-transparent to-purple-500/30"></div>
@@ -205,7 +200,6 @@ export default function TeacherTributeLanding() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
               </div>
               
-              {/* Floating card */}
               <div className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-sm p-6 rounded-2xl shadow-2xl border-2 border-blue-100 hover:scale-105 transition-transform duration-500 ease-in-out animate-bounce-slow">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center">
@@ -222,10 +216,8 @@ export default function TeacherTributeLanding() {
         </div>
       </section>
 
-      {/* Divider */}
       <div className="h-1 bg-gradient-to-r from-transparent via-blue-300 to-transparent"></div>
 
-      {/* Stats Section */}
       <section className="py-16 bg-white/80 backdrop-blur-sm border-b-2 border-blue-100 shadow-inner">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -244,10 +236,8 @@ export default function TeacherTributeLanding() {
         </div>
       </section>
 
-      {/* Divider */}
       <div className="h-1 bg-gradient-to-r from-transparent via-indigo-300 to-transparent"></div>
 
-      {/* Wishes Section */}
       <section id="wishes-section" className="py-20 bg-gradient-to-b from-white via-blue-50/30 to-white">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
@@ -311,10 +301,8 @@ export default function TeacherTributeLanding() {
         </div>
       </section>
 
-      {/* Divider */}
       <div className="h-1 bg-gradient-to-r from-transparent via-purple-300 to-transparent"></div>
 
-      {/* Form Section */}
       <section id="form-section" className="py-20 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-700 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(120,119,198,0.4),transparent_50%)]"></div>
         <div className="absolute inset-0 bg-grid-slate-100 opacity-10 bg-[size:32px_32px]"></div>
@@ -366,10 +354,8 @@ export default function TeacherTributeLanding() {
         </div>
       </section>
 
-      {/* Divider */}
       <div className="h-1 bg-gradient-to-r from-transparent via-purple-300 to-transparent"></div>
 
-      {/* Footer */}
       <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white py-12 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_70%)]"></div>
         <div className="container mx-auto px-6 text-center relative z-10">
@@ -383,7 +369,6 @@ export default function TeacherTributeLanding() {
         </div>
       </footer>
 
-      {/* Carousel Modal */}
       {showCarousel && wishes.length > 0 && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm animate-fade-in"
@@ -393,7 +378,6 @@ export default function TeacherTributeLanding() {
             className="relative bg-white rounded-3xl shadow-2xl max-w-4xl w-full mx-4 p-8 lg:p-12 transform transition-all duration-500 ease-in-out animate-slide-up"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
             <button
               onClick={() => setShowCarousel(false)}
               className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900 transition-all duration-300 ease-in-out hover:scale-110 active:scale-95"
@@ -401,7 +385,6 @@ export default function TeacherTributeLanding() {
               <X className="w-5 h-5" />
             </button>
 
-            {/* Wish Content */}
             <div className="text-center space-y-6">
               <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-4 py-2 rounded-full mb-4 shadow-lg">
                 <MessageCircle className="w-4 h-4" />
@@ -436,7 +419,6 @@ export default function TeacherTributeLanding() {
               </div>
             </div>
 
-            {/* Navigation Arrows */}
             {wishes.length > 1 && (
               <>
                 <button
@@ -456,7 +438,6 @@ export default function TeacherTributeLanding() {
               </>
             )}
 
-            {/* Dots Indicator */}
             {wishes.length > 1 && (
               <div className="flex justify-center gap-2 mt-8">
                 {wishes.map((_, index) => (
