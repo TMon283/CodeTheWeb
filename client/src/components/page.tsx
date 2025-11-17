@@ -19,12 +19,8 @@ export default function TeacherTributeLanding() {
   const [showCarousel, setShowCarousel] = useState(false);
   const [currentWishIndex, setCurrentWishIndex] = useState(0);
 
-  const API_URL = 'http://localhost:3001/api';
+  const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3001/api';
   
-  useEffect(() => {
-    fetchWishes();
-  }, []);
-
   const handleNextWish = useCallback(() => {
     setCurrentWishIndex((prev) => (prev + 1) % wishes.length);
   }, [wishes.length]);
@@ -57,7 +53,7 @@ export default function TeacherTributeLanding() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [showCarousel, handleNextWish, handlePreviousWish]);
 
-  const fetchWishes = async () => {
+  const fetchWishes = useCallback(async () => {
     try {
       const response = await fetch(`${API_URL}/wishes`);
       if (response.ok) {
@@ -69,7 +65,11 @@ export default function TeacherTributeLanding() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL]);
+
+  useEffect(() => {
+    fetchWishes();
+  }, [fetchWishes]);
 
   const stats = [
     { number: '500+', label: 'Học Sinh' },
