@@ -9,19 +9,16 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const DATA_FILE = path.join(__dirname, 'db.json');
+const DATA_FILE = '/tmp/db.json';
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Đảm bảo file db.json tồn tại
 if (!fs.existsSync(DATA_FILE)) {
   fs.writeFileSync(DATA_FILE, JSON.stringify([], null, 2));
   console.log('Đã tạo file db.json mới');
 }
 
-// Đọc dữ liệu từ file
 const readWishes = () => {
   try {
     const data = fs.readFileSync(DATA_FILE, 'utf8');
@@ -32,7 +29,6 @@ const readWishes = () => {
   }
 };
 
-// Ghi dữ liệu vào file
 const writeWishes = (wishes) => {
   try {
     fs.writeFileSync(DATA_FILE, JSON.stringify(wishes, null, 2));
@@ -43,13 +39,11 @@ const writeWishes = (wishes) => {
   }
 };
 
-// API: Lấy tất cả lời chúc
 app.get('/api/wishes', (req, res) => {
   const wishes = readWishes();
   res.json(wishes);
 });
 
-// API: Thêm lời chúc mới
 app.post('/api/wishes', (req, res) => {
   const { author, content } = req.body;
 
@@ -66,13 +60,12 @@ app.post('/api/wishes', (req, res) => {
     date: new Date().toLocaleDateString('vi-VN')
   };
 
-  wishes.unshift(newWish); // Thêm vào đầu mảng
+  wishes.unshift(newWish); 
   writeWishes(wishes);
 
   res.status(201).json(newWish);
 });
 
-// API: Xóa lời chúc (tùy chọn)
 app.delete('/api/wishes/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const wishes = readWishes();
